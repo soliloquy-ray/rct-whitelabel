@@ -1,12 +1,16 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
+import KeyValuePairList from '../models/key-value-pairs.interface';
 import { Nav } from './Nav'
 import { UserInfo } from './UserInfo'
 
-export const Header = ({ data, setData }) => {
+type Header = {
+  data: KeyValuePairList;
+  setData: Dispatch<SetStateAction<Record<string, any>[]>>;
+}
+
+export const Header = ({ data, setData }: Header) => {
   const user = data?.user;
   const token = data?.token;
-  console.log(user);
-  console.log(token);
   return (
     <>
       <header className="Header">

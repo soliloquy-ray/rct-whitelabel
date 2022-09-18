@@ -1,10 +1,17 @@
-import {useState} from 'react'
+import {SetStateAction, Dispatch, useState} from 'react'
 import { LoginModal } from './LoginModal'
 import { IonIcon } from '@ionic/react'
 import { chevronDown, chevronUp } from 'ionicons/icons';
 import localStorageService from '../services/localStorage.service';
+import KeyValuePairList from '../models/key-value-pairs.interface';
 
-export const UserInfo = ({ user, setData, token }) => {
+type UserInfo = {
+  user: KeyValuePairList;
+  setData: Dispatch<SetStateAction<Record<string, any>[]>>;
+  token: string;
+}
+
+export const UserInfo = ({ user, setData, token }: UserInfo) => {
   const [loginFlag, setLogFlag] = useState(false);
   const loginButton = () => {
     return (
@@ -25,10 +32,10 @@ export const UserInfo = ({ user, setData, token }) => {
   }
 }
 
-export const UserInfoData = ({ user, token, setData }) => {
+export const UserInfoData = ({ user, token, setData }: UserInfo) => {
   const [show, setShow] = useState(false);
   const [icon, setIcon] = useState(chevronDown);
-  const showStatus = (showStatus) => {
+  const showStatus = (showStatus: boolean) => {
     setShow(showStatus);
     if(showStatus) {
       setIcon(chevronUp);
@@ -48,7 +55,16 @@ export const UserInfoData = ({ user, token, setData }) => {
   )
 }
 
-const UserActionsPane = ({ show, token, setData, setShow, icon, setIcon }) => {
+type UserActionsPane = {
+  show: boolean;
+  token: string;
+  setData: Dispatch<SetStateAction<Record<string, any>[]>>;
+  setShow: Dispatch<SetStateAction<boolean>>;
+  icon: string;
+  setIcon: Dispatch<SetStateAction<string>>;
+}
+
+const UserActionsPane = ({ show, token, setData, setShow, icon, setIcon }: UserActionsPane) => {
   const localStorageServiceInstance = new localStorageService();
   const handleLogout = async () => {
     const res = await logoutProc(token);
@@ -73,7 +89,7 @@ const UserActionsPane = ({ show, token, setData, setShow, icon, setIcon }) => {
   )
 };
 
-const logoutProc = async (token) => {
+const logoutProc = async (token: string) => {
   const res = await fetch('http://localhost:8000/api/logout', {
     method: 'POST',
     headers: {

@@ -1,7 +1,12 @@
 import React from "react";
+import KeyValuePairList from "../models/key-value-pairs.interface";
 import './styles/Nav.scss'
 
-export const Nav = ({ user }) => {
+type Nav = {
+  user: KeyValuePairList;
+}
+
+export const Nav = ({ user }: Nav) => {
   if (!user) return (
     <></>
   );
