@@ -20,5 +20,5 @@ export const App = () => {
 const appStyle = {
   height:'100%',
   width:'100%',
-  border: '1px solid yellow'
+  // border: '1px solid yellow'
 }

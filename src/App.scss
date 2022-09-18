@@ -6,7 +6,7 @@
 }
 
 section {
-  outline: 1px solid purple;
+  // outline: 1px solid purple;
 }
 
 .logo {
@@ -23,7 +23,7 @@ section {
 }
 
 .Header {
-  border: 1px solid red;
+  // border: 1px solid red;
   border-radius: 4px;
   height: var(--headerHeight);
   display: flex;
@@ -32,6 +32,7 @@ section {
   position: sticky;
   top: 0;
   background-color: #242424;
+  color: #fff;
   z-index: 2;
   section {
     display: inline-flex;
@@ -80,7 +81,7 @@ section {
         display: flex;
         flex-direction: column;
         width: 150px;
-        background: wheat;
+        background: whitesmoke;
         padding: 10px;
         border-radius: 0 0 4px 4px;
         right: -1.5rem;
@@ -124,7 +125,7 @@ section {
 .Struct{
   margin: 0;
   padding: 0;
-  border: 2px solid green;
+  // border: 2px solid green;
   min-height: calc(100% - var(--headerHeight));
   width: 100%;
   display: flex;
