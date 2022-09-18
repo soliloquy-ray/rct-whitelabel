@@ -1,0 +1,66 @@
+.login-modal {
+  position: fixed;
+  right: var(--xMargins);
+  top: 0;
+  height: 0;
+  width: 100%;
+  opacity: 0;
+  z-index: -1;
+
+  .modal-container {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  
+  &.show {
+    opacity: 1;
+    z-index: 1;
+    height: 100%;
+    .backdrop {
+    }
+
+    form {
+      transform: scale(1);      
+    }
+  }
+
+  .backdrop {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: block;
+    background-color: rgba(34, 29, 29, 0.67);
+  }
+
+  form {
+    transform:scale(0);
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: skyblue;
+    padding: 0.5rem;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+    &>div {
+      padding: 0.5rem;
+      input {
+        padding: 4px;
+        background-color: wheat;
+        color: #333;
+        &[type=submit] {
+          width: 80px;
+          border-radius: 4px;
+        }
+      }
+      label {
+        display: flex;
+      }
+    }
+  }
+}

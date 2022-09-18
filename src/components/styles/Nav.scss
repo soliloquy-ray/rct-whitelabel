@@ -1,0 +1,23 @@
+Nav {
+  display: flex;
+  outline: 3px solid cyan;
+  width: 200px;
+  justify-content: center;
+  align-items: flex-start;
+  position: fixed;
+  height: calc(100% - var(--headerHeight));
+  transition: all ease-in-out 1s;
+
+  ul {
+    li {
+      padding: 5px;
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.shrink {
+    height: 0;
+  }
+}
