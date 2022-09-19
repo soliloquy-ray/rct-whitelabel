@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import KeyValuePairList from '../models/key-value-pairs.interface';
-import { Nav } from './Nav'
 import { UserInfo } from './UserInfo'
 
 type Header = {
@@ -22,7 +21,6 @@ export const Header = ({ data, setData }: Header) => {
           <UserInfo user={user} token={token} setData={setData} />
         </section>
       </header>
-      {/* <Nav user={user}/> */}
     </>
   )
 }

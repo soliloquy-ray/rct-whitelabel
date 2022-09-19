@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Struct } from './components/Struct';
-import { Header } from './components/Header';
-import localStorageService from './services/localStorage.service';
-import './App.scss'
-import Routing from './Routing';
-import { Nav } from './components/Nav';
+import { Struct } from '../components/Struct';
+import localStorageService from '../services/localStorage.service';
 
-export const App = () => {
+export const Checkout = () => {
   const localStorageServiceInstance = new localStorageService();
   const userData = localStorageServiceInstance.getData('userData');
   const brandsData = localStorageServiceInstance.getData('brands');
@@ -29,11 +25,9 @@ export const App = () => {
   }, []);
 
   return (
-    <div className="App" style={appStyle}>
-      <Header data={appData} setData={setUser}/>
-      <Nav user={appData}/>
-      <Routing />
-    </div>
+    <section className='Checkout'>
+      <h1>Checkout Page!</h1>
+    </section>
   )
 }
 

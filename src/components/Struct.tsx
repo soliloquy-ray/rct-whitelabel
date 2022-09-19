@@ -1,24 +1,26 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { Link } from 'react-router-dom';
 import KeyValuePairList from '../models/key-value-pairs.interface';
 
-export const Struct = ({ data }: { data: KeyValuePairList}) => {
-  console.log(data);
+export const Struct = ({ data, brands, setBrands }: { data: KeyValuePairList, brands: Record<string, any>[], setBrands: Dispatch<SetStateAction<any[]>>}) => {
   return (
     <main className="Struct">
       <section>
-        I am struct
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        { brands.map((b, bIndex) => {
+          return (
+            <div className='brandContainer' key={bIndex}>
+              <Link to={{
+                pathname: `/brands/${b.code}`,
+              }}>
+                <h3>
+                  <b>
+                    {b?.name}
+                  </b>
+                </h3>
+              </Link>
+            </div>
+          );
+        })}
       </section> 
     </main>
   );

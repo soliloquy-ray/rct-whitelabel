@@ -7,6 +7,8 @@ Nav {
   position: fixed;
   height: calc(100% - var(--headerHeight));
   transition: all ease-in-out 1s;
+  z-index: 5;
+  top: var(--headerHeight);
 
   ul {
     li {

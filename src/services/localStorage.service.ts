@@ -4,16 +4,17 @@ export default class localStorageService{
   constructor() {
   }
 
-  getData(): Record<string, any>[] {
-    const localData = localStorage.userData;
-    return localData ? JSON.parse(localData) : [];
+  getData(key: string = 'userData'): Record<string, any>[] {
+    const localData = localStorage.getItem(key);
+    const retVal = localData ? JSON.parse(localData) : [];
+    return retVal;
   }
 
-  saveData(userData: KeyValuePairList): void {
-    localStorage.userData = JSON.stringify(userData);
+  saveData(key: string = 'userData', data: KeyValuePairList): void {
+    localStorage.setItem(key, JSON.stringify(data));
   }
 
   clearData(): void {
-    localStorage.removeItem('userData');
+    localStorage.clear();
   }
 };
