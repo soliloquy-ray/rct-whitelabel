@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Key, useEffect, useState } from 'react'
 import localStorageService from '../services/localStorage.service';
 import { useParams } from 'react-router-dom';
 import KeyValuePairList from '../models/key-value-pairs.interface';
@@ -23,12 +23,12 @@ export const Brands = () => {
       const sectionId = sectData[0].id;
       
       const menuOnly = await (await fetch(`http://localhost/cloudbistro/Shared/cat_scode/${sectionId}`)).json();
-      const menuData = await Promise.all(menuOnly.map(async (menuItem, index) => {
+      const menuData = await Promise.all(menuOnly.map(async (menuItem: KeyValuePairList) => {
         const menuItemData = await (await fetch(`http://localhost/cloudbistro/Shared/menu_item_ccode/${menuItem?.id}`)).json();
-        return menuItemData.map(mid => { return {...mid, category: menuItem.name} })
+        return menuItemData.map((mid: KeyValuePairList[]) => { return {...mid, category: menuItem.name} })
       }));
       console.log(menuData.flat(2));
-      setMenuData(menuData.flat(2));
+      setMenuData(menuData.flat(2).sort((a,b) => a.availableStatus.localeCompare(b.availableStatus) ));
     }
 
     loadSections();
@@ -40,7 +40,7 @@ export const Brands = () => {
         {
           menuData.map((menuItem, mIndex) => {
             return (
-              <div className='menuItem' key={mIndex}>
+              <div className={`menuItem ${menuItem.availableStatus === 'UNAVAILABLE' ? 'disabled' : ''}`} key={mIndex}>
                 <img src={menuItem?.photos} />
                 <span>
                   <p><b>{sections[0]?.name}</b>{ menuItem?.category}</p>
