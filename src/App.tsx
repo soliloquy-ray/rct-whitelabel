@@ -5,6 +5,7 @@ import localStorageService from './services/localStorage.service';
 import './App.scss'
 import Routing from './Routing';
 import { Nav } from './components/Nav';
+import Geolocator from './components/Geolocator';
 
 export const App = () => {
   const localStorageServiceInstance = new localStorageService();
@@ -32,6 +33,7 @@ export const App = () => {
     <div className="App" style={appStyle}>
       <Header data={appData} setData={setUser}/>
       <Nav user={appData}/>
+      <Geolocator />
       <Routing />
     </div>
   )

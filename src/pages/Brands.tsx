@@ -8,13 +8,33 @@ export const Brands = () => {
   const localStorageServiceInstance = new localStorageService();
   const userData = localStorageServiceInstance.getData('userData');
   const brandsData = localStorageServiceInstance.getData('brands');
+  const allItemsData = localStorageServiceInstance.getData('allItems');
   const [sections, setSections] = useState<KeyValuePairList[]>([]);
   const [menuData, setMenuData] = useState<KeyValuePairList[]>([]);
+  const [allItems, setAllItems] = useState<KeyValuePairList[]>([]);
+  const [itemsFetched, setItemsFetched] = useState(false);
   const { code } = useParams();
+
+  useEffect(() => {
+    const populateData = async () => {
+      if (allItemsData.length > 0) {
+        setAllItems(allItemsData);
+      } else {
+        const menuItemData = await (await fetch(`http://localhost/cloudbistro/Shared/all_items`)).json();
+        setAllItems(menuItemData);
+        localStorageServiceInstance.saveData('allItems', menuItemData);
+      }
+      setItemsFetched(true);
+    }
+
+    populateData();
+  }, [])
+
   useEffect(() => {
     console.log(sections);
 
     const loadSections = async () => {
+      
       if (sections.length > 0 && sections.find((s) => s.code === code)) {
         return;
       }
@@ -24,15 +44,20 @@ export const Brands = () => {
       
       const menuOnly = await (await fetch(`http://localhost/cloudbistro/Shared/cat_scode/${sectionId}`)).json();
       const menuData = await Promise.all(menuOnly.map(async (menuItem: KeyValuePairList) => {
-        const menuItemData = await (await fetch(`http://localhost/cloudbistro/Shared/menu_item_ccode/${menuItem?.id}`)).json();
-        return menuItemData.map((mid: KeyValuePairList[]) => { return {...mid, category: menuItem.name} })
+        // const menuItemData = await (await fetch(`http://localhost/cloudbistro/Shared/menu_item_ccode/${menuItem?.id}`)).json();
+        return allItems.filter((mid: KeyValuePairList) => mid.cid === menuItem.id)
+          .map((menuItemFiltered: KeyValuePairList) => {
+           return {...menuItemFiltered, category: menuItem.name} 
+          })
       }));
       console.log(menuData.flat(2));
       setMenuData(menuData.flat(2).sort((a,b) => a.availableStatus.localeCompare(b.availableStatus) ));
     }
 
-    loadSections();
-  }, []);
+    if (itemsFetched) {
+      loadSections();
+    }
+  }, [itemsFetched]);
 
   return (
     <section className='Brand'>

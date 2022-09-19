@@ -43,7 +43,7 @@ export const ModalBody = ({ setLogFlag, setData, user }: ModalBody) => {
     console.log(e.target);
     e.preventDefault();
     const res = await loginProc(new FormData(e.target));
-    localStorageServiceInstance.saveData(res);
+    localStorageServiceInstance.saveData('userData', res);
     setData(res);
   }
   return (

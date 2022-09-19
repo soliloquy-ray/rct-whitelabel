@@ -57,9 +57,10 @@ section.Brand {
     z-index: 1;
     img {
       height: 120px;
-      flex: 1 0 auto;
-      object-fit: contain;
+      flex: 1 1 auto;
+      object-fit: cover;
       border-radius: 8px;
+      max-width: 120px;
     }
     span {
       display: flex;
@@ -67,7 +68,7 @@ section.Brand {
       text-align: center;
       flex: 0 0 auto;
       height: 120px;
-      flex: 1 1 200px;
+      flex: 1 1 auto;
       background-color: white;
       align-self: center;
       justify-self: center;
@@ -79,14 +80,16 @@ section.Brand {
         b {
           align-self: center;
           justify-self: center;
-          color: black;
+          color: #8cb3ae;
           width: 100%;
         }
       }
       p {
         color: #333;
+        line-height: 15px;
         b {          
           margin: 0 1rem;
+          display: block;
         }
       }
       i {

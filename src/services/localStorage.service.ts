@@ -4,7 +4,7 @@ export default class localStorageService{
   constructor() {
   }
 
-  getData(key: string = 'userData'): Record<string, any>[] {
+  getData(key: string = 'userData'): KeyValuePairList[] {
     const localData = localStorage.getItem(key);
     const retVal = localData ? JSON.parse(localData) : [];
     return retVal;
