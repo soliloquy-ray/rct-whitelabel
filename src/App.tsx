@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { Struct } from './components/Struct';
+import { useState } from 'react'
 import { Header } from './components/Header';
 import localStorageService from './services/localStorage.service';
 import './App.scss'
@@ -10,30 +9,16 @@ import Geolocator from './components/Geolocator';
 export const App = () => {
   const localStorageServiceInstance = new localStorageService();
   const userData = localStorageServiceInstance.getData('userData');
-  const brandsData = localStorageServiceInstance.getData('brands');
   const [appData, setUser] = useState(userData);
-  const [brands, setBrands] = useState<Record<string, any>[]>([]);
-  useEffect(() => {
-    if (brandsData.length > 1) {
-      setBrands(brandsData);
-      return;
-    }
-    fetch('http://localhost/cloudbistro/Shared/brand_kcode/KT7570')
-      .then((response) => response.json())
-      .then((data) => {
-         setBrands(data);
-         localStorageServiceInstance.saveData('brands', data);
-      })
-      .catch((err) => {
-         console.log(err.message);
-      });
-  }, []);
+  const [locationData, setLocData] = useState('');
+  const [geoDisabled, setGeoDisabled] = useState(false);
+  const [locationSet, setLocationSet] = useState(false);
 
   return (
     <div className="App" style={appStyle}>
-      <Header data={appData} setData={setUser}/>
+      <Header data={appData} setData={setUser}  locationData={locationData} setLocData={setLocData} setLocationSet={setLocationSet} locationSet={locationSet} />
       <Nav user={appData}/>
-      <Geolocator />
+      <Geolocator geoDisabled={geoDisabled} locationSet={locationSet} locationData={locationData} setLocData={setLocData} setGeoDisabled={setGeoDisabled} setLocationSet={setLocationSet}/>
       <Routing />
     </div>
   )

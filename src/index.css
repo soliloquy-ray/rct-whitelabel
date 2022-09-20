@@ -21,6 +21,8 @@
   --headerHeight: 108px;
   --appWidth: 1140px;
   --xMargins: calc(calc(100% - var(--appWidth))/2);
+  --color-primary: #8cb3ae;
+  --color-secondary: #993e21;
   
 }
 

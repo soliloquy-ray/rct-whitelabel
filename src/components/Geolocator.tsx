@@ -1,46 +1,45 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import KeyValuePairList from "../models/key-value-pairs.interface";
+import { distanceInKmBetweenEarthCoordinates, geoLocate } from "../utils/tools";
+import './styles/Geolocator.scss';
 
-const Geolocator = () => {
+const Geolocator = ({locationData, setLocData, setGeoDisabled, setLocationSet, geoDisabled, locationSet }: { locationData: string, setLocData: Dispatch<SetStateAction<string>>, setGeoDisabled: Dispatch<SetStateAction<boolean>>, setLocationSet: Dispatch<SetStateAction<boolean>>, geoDisabled: boolean, locationSet: boolean }) => {
   const storeLoc = import.meta.env.VITE_KITCHEN_GEOLOCATION;
-  const [dist, setDist] = useState(0);
-  
-  const degreesToRadians = (degrees) => {
-    return degrees * Math.PI / 180;
-  }
-  
-  const distanceInKmBetweenEarthCoordinates = (lat1, lon1, lat2, lon2) => {
-    const earthRadiusKm = 6371;
-  
-    const dLat = degreesToRadians(lat2-lat1);
-    const dLon = degreesToRadians(lon2-lon1);
-  
-    lat1 = degreesToRadians(lat1);
-    lat2 = degreesToRadians(lat2);
-  
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    return earthRadiusKm * c;
-  }
+  const [dist, setDist] = useState('0');
 
-  const successCallback = (position) => {
+  const successCallback = (position: KeyValuePairList) => {
     const { coords } = position;
     const [ lat, long ] = storeLoc.split(",");
     const distance = distanceInKmBetweenEarthCoordinates(coords.latitude, coords.longitude, lat, long);
     setDist(Number(distance).toFixed(2));
+    setLocData(coords.latitude+","+coords.longitude);
+    setLocationSet(true);
   };
   
-  const errorCallback = (error) => {
-    console.log(error);
+  const errorCallback = (error: KeyValuePairList) => {
+    setGeoDisabled(true);
   };
 
   useEffect(() => {
+    const coordsData = geoLocate(locationData);
+    successCallback(coordsData)
+  }, [locationData])
+
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  }, [])
+  }, []);
 
   return (
     <>
-      <h2> You are {dist} KM away from the restaurant!</h2>
+      <div className="geoLocator">
+        {
+          locationSet ? 
+          (<h2> You are <b>{dist}</b> KM away from the restaurant!</h2>)
+          :
+          (<h2>We are unable to detect your location. Please enable tracking or select your current location manually. </h2> )
+        }
+          
+      </div>
     </>
   )
 };

@@ -51,7 +51,7 @@ section.Brand {
     position: relative;
     width: 100%;
     outline: 1px solid steelblue;
-    background-color: #8cb3ae;
+    background-color: var(--color-primary);
     padding: 1rem;
     cursor: pointer;
     z-index: 1;
@@ -80,7 +80,7 @@ section.Brand {
         b {
           align-self: center;
           justify-self: center;
-          color: #8cb3ae;
+          color: var(--color-primary);
           width: 100%;
         }
       }
@@ -94,7 +94,7 @@ section.Brand {
       }
       i {
         font-style: normal;
-        color: #555;
+        color: var(--color-secondary);
         font-size: 1.2rem;
       }
     }

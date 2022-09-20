@@ -3,50 +3,53 @@ import localStorageService from '../services/localStorage.service';
 import { useParams } from 'react-router-dom';
 import KeyValuePairList from '../models/key-value-pairs.interface';
 import '../components/styles/Brands.scss'
+import ApiService from '../services/api.service';
+import { MenuItem } from '../models/menu-item.interface';
 
 export const Brands = () => {
   const localStorageServiceInstance = new localStorageService();
+  const apiService = new ApiService();
   const userData = localStorageServiceInstance.getData('userData');
   const brandsData = localStorageServiceInstance.getData('brands');
   const allItemsData = localStorageServiceInstance.getData('allItems');
   const [sections, setSections] = useState<KeyValuePairList[]>([]);
   const [menuData, setMenuData] = useState<KeyValuePairList[]>([]);
-  const [allItems, setAllItems] = useState<KeyValuePairList[]>([]);
+  const [allItems, setAllItems] = useState<MenuItem[]>([]);
   const [itemsFetched, setItemsFetched] = useState(false);
   const { code } = useParams();
 
   useEffect(() => {
+    console.log(allItems, Date.now());
     const populateData = async () => {
       if (allItemsData.length > 0) {
         setAllItems(allItemsData);
       } else {
-        const menuItemData = await (await fetch(`http://localhost/cloudbistro/Shared/all_items`)).json();
+        const menuItemData = await apiService.get(`Shared/all_items`);
         setAllItems(menuItemData);
         localStorageServiceInstance.saveData('allItems', menuItemData);
       }
       setItemsFetched(true);
     }
-
-    populateData();
-  }, [])
+    if (allItems.length < 1) {
+      populateData();
+    }
+  }, [allItems])
 
   useEffect(() => {
-    console.log(sections);
-
+    console.log(itemsFetched, Date.now());
     const loadSections = async () => {
       
       if (sections.length > 0 && sections.find((s) => s.code === code)) {
         return;
       }
-      const sectData = await (await fetch(`http://localhost/cloudbistro/Shared/sec_bcode/${code}`)).json();
+      const sectData = await apiService.get(`Shared/sec_bcode/${code}`);
       setSections(sectData);
       const sectionId = sectData[0].id;
       
-      const menuOnly = await (await fetch(`http://localhost/cloudbistro/Shared/cat_scode/${sectionId}`)).json();
+      const menuOnly = await apiService.get(`Shared/cat_scode/${sectionId}`);
       const menuData = await Promise.all(menuOnly.map(async (menuItem: KeyValuePairList) => {
-        // const menuItemData = await (await fetch(`http://localhost/cloudbistro/Shared/menu_item_ccode/${menuItem?.id}`)).json();
-        return allItems.filter((mid: KeyValuePairList) => mid.cid === menuItem.id)
-          .map((menuItemFiltered: KeyValuePairList) => {
+        return allItems.filter((mid: MenuItem) => mid.cid === menuItem.id)
+          .map((menuItemFiltered: MenuItem) => {
            return {...menuItemFiltered, category: menuItem.name} 
           })
       }));

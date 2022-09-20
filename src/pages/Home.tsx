@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Struct } from '../components/Struct';
+import ApiService from '../services/api.service';
 import localStorageService from '../services/localStorage.service';
 
 export const Home = () => {
   const localStorageServiceInstance = new localStorageService();
+  const apiServiceInstance = new ApiService();
   const userData = localStorageServiceInstance.getData('userData');
   const brandsData = localStorageServiceInstance.getData('brands');
   const [appData, setUser] = useState(userData);
@@ -13,15 +15,10 @@ export const Home = () => {
       setBrands(brandsData);
       return;
     }
-    fetch('http://localhost/cloudbistro/Shared/brand_kcode/KT7570')
-      .then((response) => response.json())
-      .then((data) => {
-         setBrands(data);
-         localStorageServiceInstance.saveData('brands', data);
-      })
-      .catch((err) => {
-         console.log(err.message);
-      });
+    apiServiceInstance.get(`Shared/brand_kcode/KT7570`).then((response) => {
+      setBrands(response);
+      localStorageServiceInstance.saveData('brands', response);
+    });
   }, []);
 
   return (
