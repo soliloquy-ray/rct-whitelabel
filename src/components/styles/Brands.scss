@@ -77,6 +77,10 @@ section.Brand {
       h1 {
         font-size: 1.3rem;
         flex: 1 0 auto;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        display: flex;
         b {
           align-self: center;
           justify-self: center;

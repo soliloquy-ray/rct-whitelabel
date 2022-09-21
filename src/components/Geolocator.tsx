@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import KeyValuePairList from "../models/key-value-pairs.interface";
-import { distanceInKmBetweenEarthCoordinates, geoLocate } from "../utils/tools";
+import { closestLocation, distanceInKmBetweenEarthCoordinates, geoLocate } from "../utils/tools";
 import './styles/Geolocator.scss';
 
 const Geolocator = ({locationData, setLocData, setGeoDisabled, setLocationSet, geoDisabled, locationSet }: { locationData: string, setLocData: Dispatch<SetStateAction<string>>, setGeoDisabled: Dispatch<SetStateAction<boolean>>, setLocationSet: Dispatch<SetStateAction<boolean>>, geoDisabled: boolean, locationSet: boolean }) => {
@@ -12,29 +12,26 @@ const Geolocator = ({locationData, setLocData, setGeoDisabled, setLocationSet, g
     const [ lat, long ] = storeLoc.split(",");
     const distance = distanceInKmBetweenEarthCoordinates(coords.latitude, coords.longitude, lat, long);
     setDist(Number(distance).toFixed(2));
-    setLocData(coords.latitude+","+coords.longitude);
+    const closest = closestLocation(coords);
+    setLocData(closest.lat+","+closest.lng);
     setLocationSet(true);
-  };
-  
-  const errorCallback = (error: KeyValuePairList) => {
-    setGeoDisabled(true);
   };
 
   useEffect(() => {
+    const [lat, long] = locationData.split(",");
+    if (lat.length < 1 || long.length < 0 || !lat || !long) {
+      return ;
+    }
     const coordsData = geoLocate(locationData);
     successCallback(coordsData)
   }, [locationData])
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  }, []);
 
   return (
     <>
       <div className="geoLocator">
         {
           locationSet ? 
-          (<h2> You are <b>{dist}</b> KM away from the restaurant!</h2>)
+          (<h2> You are <b>{Number(dist) > 0 ? Number(dist) : 0}</b> KM away from the restaurant!</h2>)
           :
           (<h2>We are unable to detect your location. Please enable tracking or select your current location manually. </h2> )
         }

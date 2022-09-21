@@ -45,7 +45,7 @@ export const UserInfoData = ({ user, token, setData }: UserInfo) => {
   }
   return (
     <>
-      <span className='userName'>{user.name}
+      <span className='userName'>Hi, {user.name}
         <UserActionsPane show={show} token={token} setData={setData} setShow={setShow} icon={icon} setIcon={setIcon} />
       </span>
       <a onClick={() => showStatus(!show)}>

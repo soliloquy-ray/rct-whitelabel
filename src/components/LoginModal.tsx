@@ -40,7 +40,6 @@ export const ModalBody = ({ setLogFlag, setData, user }: ModalBody) => {
     setPass(data)
   }
   const onSubmit = async (e: any) => {
-    console.log(e.target);
     e.preventDefault();
     const res = await loginProc(new FormData(e.target));
     localStorageServiceInstance.saveData('userData', res);

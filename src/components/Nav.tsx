@@ -13,9 +13,9 @@ export const Nav = ({ user }: Nav) => {
   return (
     <nav>
       <ul>
-        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/'><img src="/img/fav.png"/></Link></li>
         {/* <li><Link to='/brands'>Brands</Link></li> */}
-        <li><Link to='/checkout'>Checkout</Link></li>
+        {/* <li><Link to='/checkout'>Checkout</Link></li> */}
         {/* <li><a>Categories</a></li>
         <li><a>Products</a></li>
         <li><a>Inventory</a></li> */}

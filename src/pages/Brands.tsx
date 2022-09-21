@@ -19,7 +19,6 @@ export const Brands = () => {
   const { code } = useParams();
 
   useEffect(() => {
-    console.log(allItems, Date.now());
     const populateData = async () => {
       if (allItemsData.length > 0) {
         setAllItems(allItemsData);
@@ -36,7 +35,6 @@ export const Brands = () => {
   }, [allItems])
 
   useEffect(() => {
-    console.log(itemsFetched, Date.now());
     const loadSections = async () => {
       
       if (sections.length > 0 && sections.find((s) => s.code === code)) {
@@ -53,7 +51,6 @@ export const Brands = () => {
            return {...menuItemFiltered, category: menuItem.name} 
           })
       }));
-      console.log(menuData.flat(2));
       setMenuData(menuData.flat(2).sort((a,b) => a.availableStatus.localeCompare(b.availableStatus) ));
     }
 

@@ -5,7 +5,10 @@ import KeyValuePairList from '../models/key-value-pairs.interface';
 export const Struct = ({ data, brands, setBrands }: { data: KeyValuePairList, brands: Record<string, any>[], setBrands: Dispatch<SetStateAction<any[]>>}) => {
   return (
     <>    
-      <h1>Our Restaurants</h1>
+      <h1>Choose a Kitchen</h1>
+      <br/>
+      <hr></hr>
+      <br/>
       <main className="Struct">
         <section>
           { brands.map((b, bIndex) => {

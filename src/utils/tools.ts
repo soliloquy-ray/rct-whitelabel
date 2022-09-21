@@ -1,9 +1,15 @@
+import { cities } from "../assets/ph";
 import KeyValuePairList from "../models/key-value-pairs.interface";
 
 export interface Coordinates {
   coords: {
     latitude: string;
     longitude: string;
+  },
+  coordShort?: {
+    city: string;
+    lat: string;
+    lng: string;
   }
 }
 
@@ -35,4 +41,14 @@ export const geoLocate = (loc: string): Coordinates => {
     }
   }
   return coordsData;
+}
+
+const distance = (point: Coordinates["coords"], p: Coordinates["coordShort"]) => {
+  return Math.sqrt(Math.pow(Number(point.longitude) - Number(p?.lng), 2) + Math.pow(Number(point.latitude) - Number(p?.lat), 2))
+}
+
+export const closestLocation = (p: Coordinates["coords"]) => {
+  const closest = cities.reduce((a, b) => distance(p, a) < distance(p, b) ? a : b);
+  console.log(closest.city);
+  return closest;
 }

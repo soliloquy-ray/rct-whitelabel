@@ -16,7 +16,7 @@ export const App = () => {
 
   return (
     <div className="App" style={appStyle}>
-      <Header data={appData} setData={setUser}  locationData={locationData} setLocData={setLocData} setLocationSet={setLocationSet} locationSet={locationSet} />
+      <Header data={appData} setData={setUser}  locationData={locationData} setLocData={setLocData} setLocationSet={setLocationSet} locationSet={locationSet} setGeoDisabled={setGeoDisabled} />
       <Nav user={appData}/>
       <Geolocator geoDisabled={geoDisabled} locationSet={locationSet} locationData={locationData} setLocData={setLocData} setGeoDisabled={setGeoDisabled} setLocationSet={setLocationSet}/>
       <Routing />

@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import KeyValuePairList from '../models/key-value-pairs.interface';
 import { UserInfo } from './UserInfo'
 import { cities } from "../assets/ph";
-import { Coordinates, distanceInKmBetweenEarthCoordinates, geoLocate } from '../utils/tools';
+import { closestLocation, Coordinates, distanceInKmBetweenEarthCoordinates, geoLocate } from '../utils/tools';
 
 type Header = {
   data: KeyValuePairList;
@@ -11,22 +11,32 @@ type Header = {
   setLocData: Dispatch<SetStateAction<string>>;
   locationSet: boolean;
   setLocationSet: Dispatch<SetStateAction<boolean>>;
+  setGeoDisabled: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Header = ({ data, setData, locationData, setLocData, locationSet, setLocationSet }: Header) => {
+export const Header = ({ data, setData, locationData, setLocData, locationSet, setLocationSet, setGeoDisabled }: Header) => {
   const user = data?.user;
   const token = data?.token;
   const [dist, setDist] = useState('0');
   const storeLoc = import.meta.env.VITE_KITCHEN_GEOLOCATION;
 
-  const successCallback = (position: Coordinates) => {
+  const successCallback = (position: any) => {
     const { coords } = position;
     const [ lat, long ] = storeLoc.split(",");
     const distance = distanceInKmBetweenEarthCoordinates(Number(coords.latitude), Number(coords.longitude), lat, long);
     setDist(Number(distance).toFixed(2));
-    setLocData(coords.latitude+","+coords.longitude);
+    const closest = closestLocation(coords);
+    setLocData(closest.lat+","+closest.lng);
     setLocationSet(true);
   };
+  
+  const errorCallback = (error: KeyValuePairList) => {
+    setGeoDisabled(true);
+  };
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  }, []);
 
   const locChangeHandler = (e: any) => {
     const coordsData = geoLocate(e.target.value);
