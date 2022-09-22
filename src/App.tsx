@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Header } from './components/Header';
 import localStorageService from './services/localStorage.service';
 import './App.scss'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Routing from './Routing';
 import { Nav } from './components/Nav';
 import Geolocator from './components/Geolocator';

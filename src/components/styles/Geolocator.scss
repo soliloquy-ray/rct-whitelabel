@@ -2,10 +2,12 @@
   form {
     padding: 1rem;
     select {
-      background-color: #fff;
-      color: var(--color-primary);
+      border: 1px solid #fff;
+      background-color: var(--color-secondary);
+      color: #fff;
       padding: 0.5rem;
       border-radius: 8px;
+      margin: 0 1rem;
     }
   }
 }

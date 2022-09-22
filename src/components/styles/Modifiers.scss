@@ -1,0 +1,51 @@
+.modifiersData {
+  border-top: 1px ridge var(--color-primary);
+  border-bottom: 1px groove var(--color-primary);
+  padding: 1rem;
+
+  .modifierGroup {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    padding: 1rem;
+
+    h2 {
+      display: inline-flex;
+      margin: 0.5rem 0;
+      font-size: 1.7rem;
+
+      em {
+        font-style: normal;
+        margin: 0 1rem;
+      }
+    }
+
+    div.form-group {
+      padding: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      input {
+        margin-right: 10px;
+        height: 20px;
+        width: 20px;
+        border-radius: 4px;
+      }
+      span.details {
+        b {
+
+        }
+        i {
+          color: var(--color-secondary);
+          &:before {
+            content: "P";
+          }
+          margin-left:1rem;
+          font-style: normal;
+          
+        }
+      }
+    }
+
+  }
+
+}

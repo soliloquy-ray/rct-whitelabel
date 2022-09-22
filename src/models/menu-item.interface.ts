@@ -6,7 +6,7 @@ export interface MenuItem {
   created?: Date,
   deleted?: string,
   description?: string,
-  id?: string,
+  id: string,
   itemcode?: string,
   modified?: Date,
   name?: string,
@@ -14,5 +14,6 @@ export interface MenuItem {
   price?: string,
   sequence?: string,
   specialType?: string,
-  srp?: string
+  srp?: string,
+  category?: string
 }

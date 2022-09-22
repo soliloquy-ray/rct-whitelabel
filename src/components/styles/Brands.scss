@@ -104,3 +104,117 @@ section.Brand {
     }
   }
 }
+
+.orderItemContainer {
+  display: flex;
+  flex-basis: fit-content;
+  flex-direction: column;
+
+  .leftPane {
+    position: sticky;
+    top: 0;
+    img {
+      max-height: 600px;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+  .rightPane {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    z-index: 2;
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      padding: 0 1rem 1rem;
+      font-size: 2rem;
+      position: sticky;
+      top: 0;
+      i {
+        display: block;
+        font-size: 1rem;
+        color: var(--color-secondary);
+        font-style: normal;
+      }
+      em {
+        display: block;
+        font-style: normal;
+        font-size: 1.5rem;
+      }
+      b {
+        padding: 0.5rem 0;
+      }
+    }
+
+    .body {
+      padding: 1rem;
+    }
+
+    .orderController {
+      display: inline-flex;
+      flex-direction: row;
+      vertical-align: middle;
+      align-items: center;
+      justify-content: flex-start;
+      input {
+        flex: 0 0 40px;
+        display: inline-flex;
+        width: 30px;
+        background-color: transparent;
+        color: var(--color-secondary);
+        text-align: center;
+        border: none;
+        box-sizing: border-box;       
+      }
+      .checkoutHandler {
+        flex: 2 1 auto;
+        display: inline-flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+      }
+      button{
+        display: flex;
+        vertical-align: middle;
+        padding:0;
+        flex: 0 0 40px;
+        background-color: transparent;
+        border: none;
+        
+        &.btn {
+          margin: 0 5px;
+          border-radius: 100%;
+          color: #fff;
+          font-size: 1rem;
+          background-color: var(--color-secondary);
+          justify-self: flex-end;
+          align-self: stretch;
+          flex: 0 0 150px;
+          border-radius: 8px;
+          padding: 0.65rem 1rem;
+          color: #fff;
+          border: 0;
+          b{
+            flex: 1 0 auto;
+            justify-content: flex-end;
+          }
+        }
+      }
+
+      ion-icon {
+        width: 40px;
+        display: inline-flex;
+        &.disabled {
+          color: gray;
+          cursor: not-allowed;
+        }
+        height: 40px;
+        color: var(--color-primary);
+        background-color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+  
+}
