@@ -181,7 +181,7 @@ export const Brands = () => {
                 <input className='form-control shadow-none' readOnly type='text' value={selectedItemCt ?? 1}/>
                 <button className='form-control shadow-none'><IonIcon icon={addCircleSharp} onClick={() => updateCart(selectedItem?.id, 1)} title={''}/></button>
                 <div className='checkoutHandler'>
-                  <Button variant="primary">Add to Cart <b >P{ selectedItem && selectedItemCt ? ((Number(selectedItem.price) + selectedModsPrc) * selectedItemCt) : selectedItem.price + selectedModsPrc }</b></Button>
+                  <Button variant="primary">Add to Cart <b >P{ selectedItem && selectedItemCt ? ((Number(selectedItem.price) + selectedModsPrc) * selectedItemCt) : (selectedItem.price ? selectedItem.price + selectedModsPrc : 0) }</b></Button>
                 </div>
               </span>
             </div>

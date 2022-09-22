@@ -23,7 +23,7 @@ export const Modifiers = ({ menuItemId, selectedMods, unrequiredMods, setSelecte
     if(e.target.checked) {
       const sm = [...selectedMods];
       const modG = modifiers.find(m => m.id === mid)?.modifiers || [];
-      const mod = modG.find(m => m.id === id) || {};
+      const mod = modG.find((m: KeyValuePairList) => m.id === id) || {};
       sm.push({...mod, modifierGroupId: mid, menuItemId});
 
       if (req) {
@@ -46,11 +46,11 @@ export const Modifiers = ({ menuItemId, selectedMods, unrequiredMods, setSelecte
     console.log(selectedMods, unrequiredMods);
   }
 
-  const isRequiredMod = (mid) => {
+  const isRequiredMod = (mid: string) => {
     return unrequiredMods.findIndex(m => m === mid) < 0;
   }
 
-  const isDisabledMod = (modifierGroup, mid) => {
+  const isDisabledMod = (modifierGroup: KeyValuePairList, mid: string) => {
     const {selectionRangeMax, id} = modifierGroup;
     const isChecked = selectedMods.findIndex(mId => mid === mId.id);
 
@@ -63,7 +63,7 @@ export const Modifiers = ({ menuItemId, selectedMods, unrequiredMods, setSelecte
     return sel.length >= selectionRangeMax
   }
 
-  const isCheckedMod = (id) => {
+  const isCheckedMod = (id: string) => {
     const isChecked = selectedMods.findIndex(mId => id === mId.id);
     return isChecked > -1;
   }
@@ -89,7 +89,7 @@ export const Modifiers = ({ menuItemId, selectedMods, unrequiredMods, setSelecte
                 (
                 modifierGroup.selectionRangeMin == 0 ? 
                   (
-                    modifierGroup.modifiers.filter((m) => m.availableStatus === 'AVAILABLE').sort((a,b)=>a.sequence-b.sequence).map((modifier: KeyValuePairList) => {
+                    modifierGroup.modifiers.filter((m: KeyValuePairList) => m.availableStatus === 'AVAILABLE').sort((a: KeyValuePairList, b: KeyValuePairList)=>a.sequence-b.sequence).map((modifier: KeyValuePairList) => {
                       return (
                         <div className="form-group" key={modifier.id}>                          
                           <input type='checkbox' checked={isCheckedMod(modifier.id)} onChange={event => modifierFunc(event, modifier.id, modifierGroup.id)} disabled={isDisabledMod(modifierGroup, modifier.id)}/>
@@ -103,7 +103,7 @@ export const Modifiers = ({ menuItemId, selectedMods, unrequiredMods, setSelecte
                   )
                   :
                   (
-                    modifierGroup.modifiers.filter((m) => m.availableStatus === 'AVAILABLE').sort((a, b)=>a.sequence-b.sequence).map((modifier: KeyValuePairList) => {
+                    modifierGroup.modifiers.filter((m: KeyValuePairList) => m.availableStatus === 'AVAILABLE').sort((a: KeyValuePairList, b: KeyValuePairList)=>a.sequence-b.sequence).map((modifier: KeyValuePairList) => {
                       return (
                         <div className="form-group" key={modifier.id}>                          
                           <input type='checkbox' checked={isCheckedMod(modifier.id)} onChange={event => modifierFunc(event, modifier.id, modifierGroup.id, true)} required={isRequiredMod(modifierGroup.id)} disabled={isDisabledMod(modifierGroup, modifier.id)}/>
