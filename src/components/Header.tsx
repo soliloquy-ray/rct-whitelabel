@@ -12,9 +12,10 @@ type Header = {
   locationSet: boolean;
   setLocationSet: Dispatch<SetStateAction<boolean>>;
   setGeoDisabled: Dispatch<SetStateAction<boolean>>;
+  checkout: KeyValuePairList[];
 }
 
-export const Header = ({ data, setData, locationData, setLocData, locationSet, setLocationSet, setGeoDisabled }: Header) => {
+export const Header = ({ data, setData, locationData, setLocData, locationSet, setLocationSet, setGeoDisabled, checkout }: Header) => {
   const user = data?.user;
   const token = data?.token;
   const [dist, setDist] = useState('0');
@@ -67,7 +68,7 @@ export const Header = ({ data, setData, locationData, setLocData, locationSet, s
               </div>
             </form>
           </main>
-          <UserInfo user={user} token={token} setData={setData} />
+          <UserInfo user={user} token={token} setData={setData} checkout={checkout} />
         </section>
       </header>
     </>

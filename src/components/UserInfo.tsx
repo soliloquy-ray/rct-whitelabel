@@ -1,32 +1,43 @@
 import {SetStateAction, Dispatch, useState} from 'react'
 import { LoginModal } from './LoginModal'
 import { IonIcon } from '@ionic/react'
-import { chevronDown, chevronUp } from 'ionicons/icons';
+import { chevronDown, chevronUp, cart } from 'ionicons/icons';
 import localStorageService from '../services/localStorage.service';
 import KeyValuePairList from '../models/key-value-pairs.interface';
+import Button from 'react-bootstrap/Button';
 
 type UserInfo = {
   user: KeyValuePairList;
   setData: Dispatch<SetStateAction<Record<string, any>[]>>;
   token: string;
+  checkout?: KeyValuePairList[];
 }
 
-export const UserInfo = ({ user, setData, token }: UserInfo) => {
+export const UserInfo = ({ user, setData, token, checkout }: UserInfo) => {
   const [loginFlag, setLogFlag] = useState(false);
   const loginButton = () => {
     return (
       <a onClick={() => setLogFlag(true)}>Login</a>
     )
   }
+
+  const showCart = () => {
+    console.log(checkout);
+  }
+
   if(user) {
     return (
-      <div className='userInfo'><UserInfoData user={user} token={token} setData={setData}/></div>
+      <div className='userInfo'>
+        <UserInfoData user={user} token={token} setData={setData} />
+        <button className='btn cart' onClick={showCart}><IonIcon icon={cart}/><a className='cartItems'>{checkout?.reduce((a, b) => a + b.qty, 0)}</a></button>
+      </div>
     )
   } else {
     return (
       <>
         <div className='loginHandler'>{loginButton()}</div>
         <LoginModal user={user} loginFlag={loginFlag} setLogFlag={setLogFlag} setData={setData} />
+        <button className='btn cart' onClick={showCart}><IonIcon icon={cart}/><a className='cartItems'>{checkout?.reduce((a, b) => a + b.qty, 0)}</a></button>
       </>
     )
   }
@@ -45,7 +56,8 @@ export const UserInfoData = ({ user, token, setData }: UserInfo) => {
   }
   return (
     <>
-      <span className='userName'>Hi, {user.name}!
+      <span className='userName'>
+        <b className='prompt'>Hi, {user.name}!</b>
         <UserActionsPane show={show} token={token} setData={setData} setShow={setShow} icon={icon} setIcon={setIcon} />
       </span>
       <a onClick={() => showStatus(!show)}>

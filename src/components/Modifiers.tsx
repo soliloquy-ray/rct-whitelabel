@@ -43,7 +43,6 @@ export const Modifiers = ({ menuItemId, selectedMods, unrequiredMods, setSelecte
       }
       setSelectedMods(sm);
     }
-    console.log(selectedMods, unrequiredMods);
   }
 
   const isRequiredMod = (mid: string) => {

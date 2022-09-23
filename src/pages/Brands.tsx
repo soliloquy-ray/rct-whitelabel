@@ -1,4 +1,4 @@
-import { Key, useEffect, useState } from 'react'
+import { Dispatch, Key, SetStateAction, useEffect, useState } from 'react'
 import localStorageService from '../services/localStorage.service';
 import { useParams } from 'react-router-dom';
 import KeyValuePairList from '../models/key-value-pairs.interface';
@@ -16,7 +16,7 @@ interface CartItem {
   qty: number;
 }
 
-export const Brands = () => {
+export const Brands = ({ checkout, setCheckout }: { checkout: KeyValuePairList[], setCheckout: Dispatch<SetStateAction<KeyValuePairList[]>> }) => {
   const [lgShow, setLgShow] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -62,7 +62,6 @@ export const Brands = () => {
 
   const computeModifierPrice = (): number => {
     const prc = selectedMods.filter(sm => sm.menuItemId === selectedItem?.id).reduce((a, b) => a + (b.price * .01), 0);
-    console.log(prc);
     return prc;
   }
 
@@ -131,6 +130,17 @@ export const Brands = () => {
     // console.log(crt, itemId, id, qty);
     setCart(crt);
   }
+  
+  const addToCart = () => {
+    const si = {...selectedItem};
+    const modifiers = selectedMods.filter(sm => sm.menuItemId === selectedItem?.id).map(md => { return {name: md.name, price: md.price, modifierGroup: md.modifierGroupId} });
+    if (modifiers.length > 0) {
+      si.modifiers = modifiers;
+      si.price = (Number(si.price) + (modifiers.reduce((a, b) => a + b.price, 0) * 0.01)).toFixed(2);
+    }
+    setCheckout([...checkout, {qty: selectedItemCt ?? 1, item: si}]);
+    setLgShow(false);
+  }
 
   return (
     <>
@@ -181,7 +191,7 @@ export const Brands = () => {
                 <input className='form-control shadow-none' readOnly type='text' value={selectedItemCt ?? 1}/>
                 <button className='form-control shadow-none'><IonIcon icon={addCircleSharp} onClick={() => updateCart(selectedItem?.id, 1)} title={''}/></button>
                 <div className='checkoutHandler'>
-                  <Button variant="primary">Add to Cart <b >P{ selectedItem && selectedItemCt ? ((Number(selectedItem.price) + selectedModsPrc) * selectedItemCt) : (selectedItem.price ? selectedItem.price + selectedModsPrc : 0) }</b></Button>
+                  <Button variant="primary" onClick={addToCart}>Add to Cart <b >P{ selectedItem && selectedItemCt ? ((Number(selectedItem.price) + selectedModsPrc) * selectedItemCt) : (selectedItem.price ? Number(selectedItem.price) + selectedModsPrc : 0) }</b></Button>
                 </div>
               </span>
             </div>

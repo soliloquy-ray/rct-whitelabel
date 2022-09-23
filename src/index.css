@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'summernote';
+  src: url('/public/fonts/summernote/summernote.ttf');  
+}
+
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'summernote';
   font-size: 13px;
   line-height: 24px;
   font-weight: 400;

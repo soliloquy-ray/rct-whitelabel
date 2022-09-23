@@ -1,3 +1,5 @@
+import KeyValuePairList from "./key-value-pairs.interface"
+
 export interface MenuItem {
   availableStatus: "available"|"unavailable",
   barcode?: string,
@@ -15,5 +17,6 @@ export interface MenuItem {
   sequence?: string,
   specialType?: string,
   srp?: string,
-  category?: string
+  category?: string,
+  modifiers?: KeyValuePairList[]
 }

@@ -6,8 +6,24 @@
   min-height: 100vh;
 }
 
-section {
-  // outline: 1px solid purple;
+.btn.cart {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex: 0 0 auto;
+  ion-icon {
+    font-size: 2rem;
+    color: #fff;
+    flex: 2 0 auto;
+    display: flex;
+  }
+  a {
+    display: flex;
+    font-size: 1rem;
+    flex: 1 1 auto;
+    color: palevioletred;
+    font-weight: 900;
+  }
 }
 
 .logo {
@@ -67,6 +83,9 @@ section {
         font-size: 12px;
         position: relative;
         flex: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       div.userActionsPane {
         &.show {

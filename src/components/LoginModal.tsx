@@ -49,14 +49,14 @@ export const ModalBody = ({ setLogFlag, setData, user }: ModalBody) => {
     <div className='modal-container'>
       <div className='backdrop' onClick={logOff}>
       </div>
-      <form className="modal" onSubmit={onSubmit}>
+      <form className="modalg" onSubmit={onSubmit}>
         <div>
           <label>Username</label>
-          <input type="email" name="email" id="email" value={email} onChange={(e) => changeEmail(e.target.value)}/>
+          <input type="email" name="email" id="email" className='form-control shadow-none' value={email} onChange={(e) => changeEmail(e.target.value)}/>
         </div>
         <div>
           <label>Password</label>
-          <input type="password" name="password" id="password" value={password} onChange={(e) => changePass(e.target.value)}/>
+          <input type="password" name="password" className='form-control shadow-none' id="password" value={password} onChange={(e) => changePass(e.target.value)}/>
         </div>
         <div>
           <input type="submit" name="login" value="Login" />
