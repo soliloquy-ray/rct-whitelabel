@@ -110,6 +110,22 @@ section.Brand {
   flex-basis: fit-content;
   flex-direction: column;
 
+  a.closebtn {
+    background-color: transparent;
+    display: none;
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    justify-items: center;
+    padding: 0;
+    cursor: pointer;
+    ion-icon {
+      color: var(--color-secondary);
+      font-size: 2rem;
+      flex: 1;
+    }
+  }
+
   .leftPane {
     position: sticky;
     top: 0;
@@ -214,6 +230,36 @@ section.Brand {
         background-color: #fff;
         cursor: pointer;
       }
+    }
+  }
+  
+}
+
+@media only screen and (max-width: 768px) {
+  .Brand {
+    padding: 1rem;
+    .menuContainer {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+    
+  .orderItemContainer {
+
+    .rightPane {
+      .title {
+        padding: 0 0 1rem;
+      }
+      .body {
+        padding: 1rem 0;
+      }
+    }
+
+    a.closebtn {
+      display: flex;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 4;
     }
   }
   

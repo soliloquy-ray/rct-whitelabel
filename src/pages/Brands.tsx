@@ -7,7 +7,7 @@ import ApiService from '../services/api.service';
 import { MenuItem } from '../models/menu-item.interface';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import {addCircleSharp, removeCircleSharp} from 'ionicons/icons';
+import {addCircleSharp, removeCircleSharp, closeCircle} from 'ionicons/icons';
 import { IonIcon } from '@ionic/react'
 import { Modifiers } from '../components/Modifiers';
 
@@ -173,6 +173,7 @@ export const Brands = ({ checkout, setCheckout }: { checkout: KeyValuePairList[]
       >
         <Modal.Body>
           <div className='orderItemContainer'>
+            <a className='closebtn shadow-none' onClick={() => setLgShow(false)}><IonIcon icon={closeCircle}/></a>
             <div className='leftPane'>
               <img src={selectedItem?.photos}/>
             </div>

@@ -49,3 +49,13 @@
   }
 
 }
+
+@media only screen and (max-width: 768px) {
+  .modifiersData {
+    padding: 1rem 0;
+    span.modifierGroup {
+      padding: 1rem 0;
+    }
+  }
+  
+}

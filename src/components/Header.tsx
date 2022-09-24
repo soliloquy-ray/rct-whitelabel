@@ -3,6 +3,7 @@ import KeyValuePairList from '../models/key-value-pairs.interface';
 import { UserInfo } from './UserInfo'
 import { cities } from "../assets/ph";
 import { closestLocation, Coordinates, distanceInKmBetweenEarthCoordinates, geoLocate } from '../utils/tools';
+import { Link } from 'react-router-dom';
 
 type Header = {
   data: KeyValuePairList;
@@ -48,7 +49,7 @@ export const Header = ({ data, setData, locationData, setLocData, locationSet, s
       <header className="Header">
         <section>
           <span>
-            <img src="/img/logo.png"/>
+            <Link to='/'><img src="/img/logo.png"/></Link>
           </span>
           
           <main className="geoLocator">
