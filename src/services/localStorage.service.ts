@@ -4,8 +4,8 @@ export default class LocalStorageService{
   constructor() {
   }
 
-  getData(key: string = 'userData'): any[] {
-    const localData = sessionStorage.getItem(key);
+  getData(key: string = 'userData'): any {
+    const localData = sessionStorage.getItem(key) ?? '';
     const retVal = localData ? JSON.parse(localData) : [];
     return retVal;
   }

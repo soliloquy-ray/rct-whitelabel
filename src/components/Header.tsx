@@ -1,12 +1,11 @@
 import { useState } from 'react'
+import LocalStorageService from '../services/localStorage.service'
 import { Nav } from './Nav'
 import { UserInfo } from './UserInfo'
 
 export const Header = ({ data, setData }) => {
-  const user = data?.user;
-  const token = data?.token;
-  console.log(user);
-  console.log(token);
+  const localStorageServiceInstance = new LocalStorageService();
+  const {user, token} = localStorageServiceInstance.getData();
   return (
     <>
       <header className="Header">
@@ -15,7 +14,7 @@ export const Header = ({ data, setData }) => {
             <img src="/vite.svg"/>
           </span>
           <div className="title">My Business Assistant</div>
-          <UserInfo user={user} token={token} setData={setData} />
+          <UserInfo user={user} setData={setData} />
         </section>
       </header>
     </>

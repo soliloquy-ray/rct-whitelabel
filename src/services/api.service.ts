@@ -11,4 +11,16 @@ export default class ApiService{
     return data;
   }
 
+  async post(url: string, headers: KeyValuePairList = {}, body: KeyValuePairList = {}): Promise<any[]>{
+    const data = (await fetch(`${this.apiEndpoint}/${url}`, 
+      { method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      ...headers},
+      body: JSON.stringify(body)
+    })).json();
+    return data;
+  }
+
 };

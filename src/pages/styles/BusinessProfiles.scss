@@ -1,0 +1,9 @@
+.businessProfiles {
+  display: flex;
+  justify-content: center;
+
+  .content {
+    width: var(--appWidth);
+    flex: 0 0 auto;
+  }
+}

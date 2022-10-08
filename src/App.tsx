@@ -8,13 +8,15 @@ import { Nav } from './components/Nav';
 
 export const App = () => {
   const localStorageServiceInstance = new localStorageService();
-  const localData = localStorageServiceInstance.getData();
-  const [data, setData] = useState(localData);
+  const {user, token} = localStorageServiceInstance.getData();
+  const [data, setData] = useState(user);
 
   return (
     <div className="App" style={appStyle}>
       <Header data={data} setData={setData}/>
-      <Nav user={data}/>
+      {
+        data ? (<Nav user={data}/>) : (<></>)
+      }
       <Routing />
     </div>
   )

@@ -1,5 +1,6 @@
 import { Dispatch, FormEventHandler, SetStateAction, useState } from 'react';
 import KeyValuePairList from '../models/key-value-pairs.interface';
+import ApiService from '../services/api.service';
 import localStorageService from '../services/localStorage.service';
 import './styles/LoginModal.scss'
 
@@ -67,19 +68,15 @@ export const ModalBody = ({ setLogFlag, setData, user }: ModalBody) => {
 }
 
 const loginProc = async (formData: FormData) => {
+  const apiServiceInstance = new ApiService();
   const object: any = {};
   formData.forEach(function(value, key){
       object[key] = value;
   });
-  const res = await fetch('http://localhost:8000/api/login', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(object)
-  })
-  return res.json();
+  const res = await apiServiceInstance.post('api/login', {},
+    object
+  );
+  return res;
 }
 
 
