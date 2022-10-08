@@ -8,6 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import { closeCircle } from "ionicons/icons";
 import { IonIcon } from "@ionic/react";
 import DatePicker from 'react-date-picker';
+import LocalStorageService from "../services/localStorage.service";
 
 export const BusinessProfiles = () => {
   const apiServiceInstance = new ApiService();
@@ -116,8 +117,10 @@ const AddBusinessForm = ({ lgShow, setLgShow, getBusinesses }) => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
+    const localStorageService = new LocalStorageService();
+    const {token} = localStorageService.getData();
     const apiServiceInstance = new ApiService();
-    const res = await apiServiceInstance.post('api/business_profile', {},
+    const res = await apiServiceInstance.post('api/business_profile', {'Authorization': `Bearer ${token}`},
       {...formData, business_established: establishedDate}
     );
     await getBusinesses();

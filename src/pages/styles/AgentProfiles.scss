@@ -1,0 +1,23 @@
+.agentProfiles {
+  display: flex;
+  justify-content: center;
+
+  .content {
+    margin-top: 30px;
+    max-width: var(--appWidth);
+    width: 100%;
+    flex: 0 0 auto;
+  }
+}
+
+.addAgentForm {
+  .form-group {    
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0.5rem;
+    label {
+      font-weight: bolder;
+    }
+  }
+
+}

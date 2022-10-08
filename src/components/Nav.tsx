@@ -15,7 +15,7 @@ export const Nav = ({ user }: Nav) => {
       <ul>
         <li><Link to='/'><img src="./vite.svg"/></Link></li>
         <li><Link to='/businesses'>Business Profiles</Link></li>                
-        <li><Link to='agents'>Agent Profiles</Link></li>
+        <li><Link to='/agents'>Agent Profiles</Link></li>
         <li><Link to='brands'>Brands</Link></li>
         <li><Link to='categories'>Categories</Link></li>
         <li><Link to='products'>Products</Link></li>
