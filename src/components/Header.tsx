@@ -14,7 +14,7 @@ export const Header = ({ data, setData }) => {
           <span>
             <img src="/vite.svg"/>
           </span>
-          <b className="title">Header</b>
+          <div className="title">My Business Assistant</div>
           <UserInfo user={user} token={token} setData={setData} />
         </section>
       </header>

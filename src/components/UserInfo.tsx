@@ -29,7 +29,7 @@ export const UserInfo = ({ user, setData, token, checkout }: UserInfo) => {
     return (
       <div className='userInfo'>
         <UserInfoData user={user} token={token} setData={setData} />
-        <button className='btn cart' onClick={showCart}><IonIcon icon={cart}/><a className='cartItems'>{checkout?.reduce((a, b) => a + b.qty, 0)}</a></button>
+        {/* <button className='btn cart' onClick={showCart}><IonIcon icon={cart}/><a className='cartItems'>{checkout?.reduce((a, b) => a + b.qty, 0)}</a></button> */}
       </div>
     )
   } else {
@@ -37,7 +37,7 @@ export const UserInfo = ({ user, setData, token, checkout }: UserInfo) => {
       <>
         <div className='loginHandler'>{loginButton()}</div>
         <LoginModal user={user} loginFlag={loginFlag} setLogFlag={setLogFlag} setData={setData} />
-        <button className='btn cart' onClick={showCart}><IonIcon icon={cart}/><a className='cartItems'>{checkout?.reduce((a, b) => a + b.qty, 0)}</a></button>
+        {/* <button className='btn cart' onClick={showCart}><IonIcon icon={cart}/><a className='cartItems'>{checkout?.reduce((a, b) => a + b.qty, 0)}</a></button> */}
       </>
     )
   }

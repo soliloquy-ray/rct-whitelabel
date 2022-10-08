@@ -22,9 +22,9 @@ export const Home = () => {
   }, []); */
 
   return (
-    <section className='Home'>
+    <main className='page Home' style={appStyle}>
       <Struct data={appData}/>
-    </section>
+    </main>
   )
 }
 

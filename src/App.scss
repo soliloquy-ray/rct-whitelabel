@@ -3,10 +3,27 @@
   width: 100%;
   margin: 0 auto;
   text-align: center;
+  min-height: 100vh;
 }
 
-section {
-  outline: 1px solid purple;
+.btn.cart {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex: 0 0 auto;
+  ion-icon {
+    font-size: 2rem;
+    color: #fff;
+    flex: 2 0 auto;
+    display: flex;
+  }
+  a {
+    display: flex;
+    font-size: 1rem;
+    flex: 1 1 auto;
+    color: palevioletred;
+    font-weight: 900;
+  }
 }
 
 .logo {
@@ -22,109 +39,20 @@ section {
   }
 }
 
-.Header {
-  border: 1px solid red;
-  border-radius: 4px;
-  height: var(--headerHeight);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  background-color: #242424;
-  z-index: 2;
-  section {
-    display: inline-flex;
-    flex: 1;
-    max-width: var(--appWidth);
+.Home{
+  
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
-    &>div {
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      justify-self: center;
-      &:not(.login-modal) {
-        justify-self: flex-end;
-        flex: 1;
-        position: relative;
-      }
-      &.userInfo {
-        flex-direction: row;
-      }
-      a {
-        cursor: pointer;
-        position: relative;
-        padding: 0 0.5rem;
-        flex: 1 0 25px;
-        align-self: center;
-        text-align: center;
-        ion-icon {
-        }
-      }
-      span.userName {
-        font-size: 12px;
-        position: relative;
-        flex: 2;
-      }
-      div.userActionsPane {
-        &.show {
-          transform: scaleY(1);
-        }
-        -webkit-transition: 0.3s ease-in-out;
-        -moz-transition: 0.3s ease-in-out;
-        -o-transition: 0.3s ease-in-out;
-        transition: 0.3s ease-in-out;
-        transform: scaleY(0);
-        position: absolute;
-        top: 100%;
-        display: flex;
-        flex-direction: column;
-        width: 150px;
-        background: wheat;
-        padding: 10px;
-        border-radius: 0 0 4px 4px;
-        right: -1.5rem;
-      }
-    }
-  }
-  span {
-    &:not(.userActionsModal) {
-      justify-self: flex-start;
-      flex: 1;
-      text-align: center;
-    }
-
-    img {
-      display: inline;
-      width: 45px;
-    }
-
-    &.userActionsModal {
-      display: none;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
-      position: fixed;
-      background-color: rgba(34, 29, 29, 0.67);
-      &.show {
-        display: block;
-      }
-    }
-  }
-  b.title {
-    flex: 5;
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    justify-self: center;
-  }
+main.page {
+  min-height: calc(100vh - var(--headerHeight));
 }
 
 .Struct{
+  // font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin: 0;
   padding: 0;
-  border: 2px solid green;
+  // border: 2px solid green;
   min-height: calc(100% - var(--headerHeight));
   width: 100%;
   display: flex;
@@ -144,18 +72,69 @@ section {
     gap: 16px;
     grid-gap: 16px;
 
-    div {
+    div.brandContainer {
       align-items: center;
       aspect-ratio: 1;
       border-radius: 8px;
       display: flex;
       justify-content: center;
       max-height: 270px;
-      min-height: 150px;
+      min-height: 180px;
       overflow: hidden;
       position: relative;
       width: 100%;
-      outline: 1px solid steelblue
+      outline: 1px solid steelblue;
+      background-color: var(--color-primary);
+      flex-direction: column;
+      cursor: pointer;
+      
+      h3 {
+        display: flex;
+        font-size: 1.5rem;
+        text-align: center;
+        flex: 0 0 auto;
+        height: 175px;
+        width: 175px;
+        max-width: 100%;
+        background-color: white;
+        align-self: center;
+        justify-self: center;
+        b {
+          align-self: center;
+          justify-self: center;
+          color: black;
+          width: 100%;
+          white-space: break-spaces;
+        }
+      }
+      p {
+        width: 100%;
+        text-align: center;
+        color: whitesmoke;
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .Struct {
+    padding: 1rem;
+    section {
+      grid-template-columns: repeat(2,1fr);
+
+      div.brandContainer {
+        a {
+          h3 {
+            background-color: inherit;
+            width: 100%;
+            b{
+              color: #fff;
+            }
+          }
+
+        }
+      }
     }
   }
 }
