@@ -50,9 +50,9 @@ export const BusinessProfiles = () => {
   }, [])
   
   return (
-    <main className="page businessProfiles" style={appStyle}>
+    <main className="page businessProfiles">
       <section className="content">
-        <DataTable columns={columns} data={business} fixedHeader dense striped={true} responsive/>
+        <DataTable columns={columns} data={business} fixedHeader responsive/>
       </section>
     </main>
   )
@@ -62,4 +62,12 @@ const appStyle = {
   height:'100%',
   width:'100%',
   // border: '1px solid yellow'
+}
+
+const AddBusinessForm = () => {
+  return (
+    <div className="addBusinessForm">
+      
+    </div>
+  )
 }

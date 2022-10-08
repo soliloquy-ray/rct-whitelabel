@@ -3,7 +3,9 @@
   justify-content: center;
 
   .content {
-    width: var(--appWidth);
+    margin-top: 30px;
+    max-width: var(--appWidth);
+    width: 100%;
     flex: 0 0 auto;
   }
 }
