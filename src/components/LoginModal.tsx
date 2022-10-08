@@ -1,7 +1,22 @@
-import { useState } from 'react';
+import { Dispatch, FormEventHandler, SetStateAction, useState } from 'react';
+import KeyValuePairList from '../models/key-value-pairs.interface';
 import localStorageService from '../services/localStorage.service';
 import './styles/LoginModal.scss'
-export const LoginModal = ({ loginFlag, setLogFlag, setData, user }) => {
+
+type LoginModal = {
+  loginFlag: boolean;
+  setLogFlag: Dispatch<SetStateAction<boolean>>;
+  setData: Dispatch<SetStateAction<Record<string, any>[]>>;
+  user: KeyValuePairList;
+}
+
+type ModalBody = {
+  setLogFlag: Dispatch<SetStateAction<boolean>>;
+  setData: Dispatch<SetStateAction<Record<string, any>[]>>;
+  user: KeyValuePairList;
+}
+
+export const LoginModal = ({ loginFlag, setLogFlag, setData, user }: LoginModal) => {
   return (
     <div className={`login-modal ${ loginFlag ? 'show' : ''}`}>
       <ModalBody setLogFlag={setLogFlag} setData={setData} user={user} />
@@ -9,7 +24,7 @@ export const LoginModal = ({ loginFlag, setLogFlag, setData, user }) => {
   )
 };
 
-export const ModalBody = ({ setLogFlag, setData, user }) => {
+export const ModalBody = ({ setLogFlag, setData, user }: ModalBody) => {
   const localStorageServiceInstance = new localStorageService();
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
@@ -18,31 +33,30 @@ export const ModalBody = ({ setLogFlag, setData, user }) => {
     changePass('')
     setLogFlag(false);
   }
-  const changeEmail = (data) => {
+  const changeEmail = (data: string) => {
     setEmail(data)
   }
-  const changePass = (data) => {
+  const changePass = (data: string) => {
     setPass(data)
   }
-  const onSubmit = async (e) => {
-    console.log(e.target);
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     const res = await loginProc(new FormData(e.target));
-    localStorageServiceInstance.saveData(res);
+    localStorageServiceInstance.saveData('userData', res);
     setData(res);
   }
   return (
     <div className='modal-container'>
       <div className='backdrop' onClick={logOff}>
       </div>
-      <form className="modal" onSubmit={onSubmit}>
+      <form className="modalg" onSubmit={onSubmit}>
         <div>
           <label>Username</label>
-          <input type="email" name="email" id="email" value={email} onChange={(e) => changeEmail(e.target.value)}/>
+          <input type="email" name="email" id="email" className='form-control shadow-none' value={email} onChange={(e) => changeEmail(e.target.value)}/>
         </div>
         <div>
           <label>Password</label>
-          <input type="password" name="password" id="password" value={password} onChange={(e) => changePass(e.target.value)}/>
+          <input type="password" name="password" className='form-control shadow-none' id="password" value={password} onChange={(e) => changePass(e.target.value)}/>
         </div>
         <div>
           <input type="submit" name="login" value="Login" />
@@ -52,8 +66,8 @@ export const ModalBody = ({ setLogFlag, setData, user }) => {
   )
 }
 
-const loginProc = async (formData) => {
-  const object = {};
+const loginProc = async (formData: FormData) => {
+  const object: any = {};
   formData.forEach(function(value, key){
       object[key] = value;
   });

@@ -18,7 +18,6 @@ export const Header = ({ data, setData }) => {
           <UserInfo user={user} token={token} setData={setData} />
         </section>
       </header>
-      <Nav user={user}/>
     </>
   )
 }

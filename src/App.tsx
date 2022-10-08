@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Struct } from './components/Struct';
 import { Header } from './components/Header';
 import localStorageService from './services/localStorage.service';
 import './App.scss'
+import Routing from './Routing';
+import { Nav } from './components/Nav';
 
 export const App = () => {
   const localStorageServiceInstance = new localStorageService();
@@ -12,7 +13,8 @@ export const App = () => {
   return (
     <div className="App" style={appStyle}>
       <Header data={data} setData={setData}/>
-      <Struct data={data}/>
+      <Nav user={data}/>
+      <Routing />
     </div>
   )
 }

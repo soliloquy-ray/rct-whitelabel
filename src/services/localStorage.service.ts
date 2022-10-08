@@ -1,19 +1,20 @@
 import KeyValuePairList from "../models/key-value-pairs.interface";
 
-export default class localStorageService{
+export default class LocalStorageService{
   constructor() {
   }
 
-  getData(): Record<string, any>[] {
-    const localData = localStorage.userData;
-    return localData ? JSON.parse(localData) : [];
+  getData(key: string = 'userData'): any[] {
+    const localData = sessionStorage.getItem(key);
+    const retVal = localData ? JSON.parse(localData) : [];
+    return retVal;
   }
 
-  saveData(userData: KeyValuePairList): void {
-    localStorage.userData = JSON.stringify(userData);
+  saveData(key: string = 'userData', data: KeyValuePairList): void {
+    sessionStorage.setItem(key, JSON.stringify(data));
   }
 
   clearData(): void {
-    localStorage.removeItem('userData');
+    sessionStorage.clear();
   }
 };

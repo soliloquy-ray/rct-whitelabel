@@ -19,6 +19,7 @@
     z-index: 1;
     height: 100%;
     .backdrop {
+      display: block;
     }
 
     form {
@@ -32,8 +33,8 @@
     top: 0;
     height: 100%;
     width: 100%;
-    display: block;
-    background-color: rgba(34, 29, 29, 0.67);
+    display: none;
+    color: rgba(34, 29, 29, 0.67);
   }
 
   form {
@@ -41,7 +42,7 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background-color: skyblue;
+    background-color: var(--color-primary);
     padding: 0.5rem;
     -webkit-transition: 0.3s ease-in-out;
     -moz-transition: 0.3s ease-in-out;
@@ -51,8 +52,8 @@
       padding: 0.5rem;
       input {
         padding: 4px;
-        background-color: wheat;
-        color: #333;
+        color: wheat;
+        background-color: #fff;
         &[type=submit] {
           width: 80px;
           border-radius: 4px;
@@ -60,7 +61,14 @@
       }
       label {
         display: flex;
+        color: #333;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .login-modal {
+    right: auto;
   }
 }

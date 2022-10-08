@@ -1,12 +1,14 @@
 Nav {
   display: flex;
-  outline: 3px solid cyan;
+  // outline: 3px solid cyan;
   width: 200px;
   justify-content: center;
   align-items: flex-start;
   position: fixed;
   height: calc(100% - var(--headerHeight));
   transition: all ease-in-out 1s;
+  z-index: 5;
+  top: var(--headerHeight);
 
   ul {
     li {
@@ -19,5 +21,11 @@ Nav {
 
   &.shrink {
     height: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  Nav {
+    display: none;  
   }
 }
